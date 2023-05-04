@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Insufodo</title>
+
+    <link rel="shortcut icon" href="insufodo.ico" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/4.9.95/css/materialdesignicons.min.css" />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/esm/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"></script>
+
+    <script>
+
+        window.onload = () => {
+            document.getElementById('first_name').focus()
+        }
+
+        function checkName() {
+            var name = document.getElementById('first_name').value
+            if (name.trim() !== '' && !(/^[a-zA-Z]+$/.test(name))) {
+                alert('Nombre: Ingrese sólo letras sin espacios!')
+                document.getElementById('first_name').value = ''
+            }
+        }
+
+        function checkSurname() {
+            var surname = document.getElementById('last_name').value
+            if (surname.trim() !== '' && !(/^[a-zA-Z]+$/.test(surname))) {
+                alert('Apellido: Ingrese sólo letras sin espacios!')
+                document.getElementById('last_name').value = ''
+            }
+        }
+
+        function checkDNI() {
+            var dni = document.getElementById('dni').value
+            if (dni.trim() !== '' && !(/^\d+$/.test(dni))) {
+                alert('DNI: Ingrese sólo números sin espacios!')
+                document.getElementById('dni').value = ''
+            }
+        }
+
+        function sendMail() {
+            var first_name = document.getElementById('first_name').value
+            var last_name = document.getElementById('last_name').value
+            var dni = document.getElementById('dni').value
+            var email = document.getElementById('email').value
+            var type = document.getElementById('type').value
+            var aux = document.getElementsByClassName('form-check-input')
+            var subjects = ''
+            for (x = 0; x < aux.length; x++) {
+                if (aux[x].checked === true) {
+                    subjects += aux[x].value + ', '
+                }
+            }
+            if (subjects !== '') {
+                if (first_name.trim() !== '' && last_name.trim() !== '' && dni.trim() !== '' && email.trim() !== '' && type.trim() !== '' && subjects.trim() !== '') {
+                    window.open('mailto:leo_rp2000@hotmail.com?subject=Inscripcion&body=' + encodeURIComponent('Nombre: ' + first_name + '\r\nApellido: ' + last_name + '\r\nDNI: ' + dni + '\r\nEmail: ' + email + '\r\nTipo: ' + type + '\r\nMaterias: ' + subjects.substring(0, subjects.lastIndexOf(','))))
+                } else {
+                    alert("Por favor complete todos los campos!")
+                }
+            } else {
+                alert("Seleccione al menos una Materia!")
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+    <section class="account_bg_color_gradient"><br>
+        <div class="container"><br>
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <img src="insufodo.jpg" alt="" class="img-fluid mx-auto d-block" style="height: 192px">
+                    <div class="col-lg-12 mt-3">
+                        <h3 class="text-muted" style="text-align: center">Inscripción Online</h3>
+                    </div>
+                    <div class="col-lg-12 mt-3">
+                        <label class="text-muted">Nombre</label>
+                        <input id="first_name" class="form-control" placeholder="Nombre" required="true" onpaste="return false" onblur="checkName()">
+                    </div>
+                    <div class="col-lg-12 mt-3">
+                        <label class="text-muted">Apellido</label>
+                        <input id="last_name" class="form-control" placeholder="Apellido" required="true" onpaste="return false" onblur="checkSurname()">
+                    </div>
+                    <div class="col-lg-12 mt-3">
+                        <label class="text-muted">DNI</label>
+                        <input id="dni" class="form-control" placeholder="DNI" required="true" maxlength="8" onpaste="return false" onblur="checkDNI()">
+                    </div>
+                    <div class="col-lg-12 mt-3">
+                        <label class="text-muted">Email</label>
+                        <input type="email" id="email" class="form-control" placeholder="Email" required="true" onpaste="return false">
+                    </div>
+                    <div class="col-lg-12 mt-3">
+                        <label class="text-muted">Tipo de Inscripción</label>
+                        <select id="type" class="form-control">
+                            <option value="Cursada" selected>Cursada</option>
+                            <option value="Final">Final</option>
+                        </select>
+                    </div><br>
+                    <div class="col-lg-12 mt-3" style="text-align: center">
+                        <div class="form-check form-check-inline">
+                            <input id="language" class="form-check-input" type="checkbox" value="Lengua">
+                            <label class="form-check-label text-muted" for="language" style="cursor: pointer">Lengua</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input id="physical" class="form-check-input" type="checkbox" value="Fisica">
+                            <label class="form-check-label text-muted" for="physical" style="cursor: pointer">Física</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input id="chemistry" class="form-check-input" type="checkbox" value="Quimica">
+                            <label class="form-check-label text-muted" for="chemistry" style="cursor: pointer">Química</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input id="math" class="form-check-input" type="checkbox" value="Matematica">
+                            <label class="form-check-label text-muted" for="math" style="cursor: pointer">Matemática</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input id="english" class="form-check-input" type="checkbox" value="Ingles">
+                            <label class="form-check-label text-muted" for="english" style="cursor: pointer">Inglés</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 mt-3"><br>
+                        <button class="btn btn-custom w-100 btn-primary" onclick="sendMail()">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div><br>
+    </section><br>
+</body>
+
+</html>
